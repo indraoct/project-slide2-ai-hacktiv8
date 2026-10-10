@@ -1,4 +1,4 @@
-# mirror-slide2 — Gemini Flash API
+# project-slide2-ai-hacktiv8
 
 RESTful API dengan ExpressJS yang terintegrasi dengan **Google Gemini 2.5 Flash** untuk menghasilkan respons dari berbagai tipe input: teks, gambar, dokumen, dan audio.
 
