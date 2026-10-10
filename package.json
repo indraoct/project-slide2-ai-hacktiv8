@@ -1,0 +1,19 @@
+{
+  "name": "project-slide2-ai-hacktiv8",
+  "version": "1.0.0",
+  "description": "RESTful API dengan ExpressJS yang terintegrasi dengan Google Gemini 2.5 Flash untuk input teks, gambar, dokumen, dan audio",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@google/genai": "^2.28.0",
+    "dotenv": "^18.0.7",
+    "express": "^5.3.0",
+    "multer": "^2.4.0"
+  }
+}
