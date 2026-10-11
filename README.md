@@ -2,9 +2,17 @@
 
 **Author:** Indra Octama
 
-RESTful API dengan ExpressJS yang terintegrasi dengan **Google Gemini API** (model default: `gemini-3.8-flash`) untuk menghasilkan respons dari berbagai tipe input: teks, gambar, dokumen, dan audio.
+**NusaTrip** — chatbot travel assistant berbasis **Google Gemini API** (model: `gemini-3.8-flash`) dengan ExpressJS + web UI. Ahli pariwisata **Jogja, Bali, dan Bandung**: rekomendasi destinasi, itinerary, kuliner, transportasi, dan estimasi bujet.
 
-Berdasarkan materi Sesi 2 — Eksplorasi Gemini AI API.
+Berdasarkan materi Sesi 2 & 3 — Eksplorasi Gemini AI API.
+
+## Fitur Kreatif
+
+- **Gaya bahasa formal/santai** — dipilih dari dropdown di UI, diteruskan ke `systemInstruction`
+- **Domain pengetahuan pariwisata** — persona khusus Jogja, Bali, dan Bandung
+- **Integrasi API eksternal** — cuaca real-time [Open-Meteo](https://open-meteo.com/) (tanpa API key) disisipkan ke konteks model
+- **Memory percakapan** — riwayat chat disimpan di SQLite (`node:sqlite`, file `chat.db`) per `sessionId`, tetap nyambung setelah refresh
+- **Rekomendasi & suggestion chips** — tombol pertanyaan cepat di UI
 
 ## Persiapan Awal (Checklist)
 
@@ -64,12 +72,35 @@ Server berjalan di `http://localhost:3000`.
 
 ## Web UI (Chatbot)
 
-Buka `http://localhost:3000` di browser untuk menggunakan antarmuka chatbot (folder `public/`). UI mendukung:
+Buka `http://localhost:3000` di browser untuk menggunakan **NusaTrip** (folder `public/`). UI mendukung:
 
-- **Chat teks** — dikirim ke `/generate-text`
+- **Chat teks** — dikirim ke `/chat` dengan memory percakapan
+- **Toggle gaya bahasa** — Santai / Formal
+- **Suggestion chips** — klik untuk langsung bertanya
+- **Tombol Reset** — hapus riwayat chat dan mulai sesi baru
 - **Upload file** (tombol 📎) — gambar, dokumen, dan audio otomatis diarahkan ke endpoint masing-masing berdasarkan tipe file
 
 ## Endpoints
+
+### POST /chat
+
+Endpoint utama chatbot. Body — raw JSON:
+
+```json
+{ "message": "Itinerary 3 hari di Bali", "sessionId": "abc-123", "style": "santai" }
+```
+
+- **message** (wajib): pesan pengguna
+- **sessionId** (opsional, default `"default"`): identitas sesi untuk memory
+- **style** (opsional): `"santai"` atau `"formal"`
+
+### GET /chat/:sessionId/history
+
+Mengambil seluruh riwayat percakapan sebuah sesi.
+
+### DELETE /chat/:sessionId
+
+Menghapus riwayat percakapan sebuah sesi.
 
 ### POST /generate-text
 

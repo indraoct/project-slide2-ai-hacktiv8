@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f2f5;
+  background-color: #e6f4f1;
   margin: 0;
   padding: 0;
 }
@@ -14,9 +14,67 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.header {
   text-align: center;
-  margin-bottom: 20px;
+}
+
+h1 {
+  margin-bottom: 4px;
+  color: #0f766e;
+}
+
+.subtitle {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#style-select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 14px;
+  background: #fff;
+  cursor: pointer;
+}
+
+#reset-btn {
+  margin-left: auto;
+  padding: 6px 14px;
+  background-color: #dc3545;
+  font-size: 14px;
+}
+
+#reset-btn:hover {
+  background-color: #bb2d3b;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.chip {
+  padding: 6px 12px;
+  font-size: 13px;
+  background-color: #fff;
+  color: #0f766e;
+  border: 1px solid #99e2d8;
+  border-radius: 20px;
+}
+
+.chip:hover {
+  background-color: #ccfbf1;
 }
 
 .chat-box {
@@ -120,7 +178,7 @@ input[type="text"] {
 button {
   padding: 10px 20px;
   border: none;
-  background-color: #0d6efd;
+  background-color: #0f766e;
   color: white;
   border-radius: 20px;
   font-size: 16px;
@@ -128,7 +186,7 @@ button {
 }
 
 button:hover {
-  background-color: #0b5ed7;
+  background-color: #115e59;
 }
 
 button:disabled {
@@ -143,4 +201,8 @@ button:disabled {
 
 #attach-btn:hover {
   background-color: #5c636a;
+}
+
+#reset-btn:disabled {
+  background-color: #dc3545;
 }

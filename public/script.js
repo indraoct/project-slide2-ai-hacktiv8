@@ -7,8 +7,39 @@ const filePreview = document.getElementById('file-preview');
 const fileName = document.getElementById('file-name');
 const removeFileBtn = document.getElementById('remove-file');
 const sendBtn = document.getElementById('send-btn');
+const styleSelect = document.getElementById('style-select');
+const resetBtn = document.getElementById('reset-btn');
 
 let attachedFile = null;
+
+// sessionId disimpan di localStorage agar memory percakapan (SQLite di
+// backend) tetap nyambung meskipun halaman di-refresh.
+let sessionId = localStorage.getItem('nusatrip-session');
+if (!sessionId) {
+  sessionId = crypto.randomUUID();
+  localStorage.setItem('nusatrip-session', sessionId);
+}
+
+// Muat riwayat percakapan dari backend saat halaman dibuka.
+async function loadHistory() {
+  try {
+    const res = await fetch(`/chat/${sessionId}/history`);
+    const data = await res.json();
+    (data.messages || []).forEach((m) => {
+      appendMessage(m.role === 'user' ? 'user' : 'bot', m.text);
+    });
+  } catch {
+    // Abaikan — server mungkin belum punya riwayat.
+  }
+  if (!chatBox.children.length) {
+    appendMessage(
+      'bot',
+      'Halo! Aku NusaTrip 🌴 Mau liburan ke Jogja, Bali, atau Bandung? ' +
+        'Tanya apa aja — itinerary, kuliner, bujet, sampai cuaca terkini.'
+    );
+  }
+}
+loadHistory();
 
 // Pilih endpoint backend berdasarkan tipe file yang dilampirkan.
 function getEndpointForFile(file) {
@@ -37,6 +68,27 @@ removeFileBtn.addEventListener('click', () => {
   filePreview.classList.add('hidden');
 });
 
+// Suggestion chips: klik untuk langsung mengirim pertanyaan.
+document.querySelectorAll('.chip').forEach((chip) => {
+  chip.addEventListener('click', () => {
+    input.value = chip.textContent;
+    form.requestSubmit();
+  });
+});
+
+// Reset: hapus riwayat di backend, buat sessionId baru, bersihkan UI.
+resetBtn.addEventListener('click', async () => {
+  try {
+    await fetch(`/chat/${sessionId}`, { method: 'DELETE' });
+  } catch {
+    // Abaikan error — tetap reset sisi client.
+  }
+  sessionId = crypto.randomUUID();
+  localStorage.setItem('nusatrip-session', sessionId);
+  chatBox.innerHTML = '';
+  loadHistory();
+});
+
 form.addEventListener('submit', async function (e) {
   e.preventDefault();
 
@@ -54,7 +106,7 @@ form.addEventListener('submit', async function (e) {
 
   input.value = '';
   setLoading(true);
-  const loadingMsg = appendMessage('bot', 'Gemini is thinking...', 'loading');
+  const loadingMsg = appendMessage('bot', 'NusaTrip sedang berpikir...', 'loading');
 
   try {
     let response;
@@ -68,11 +120,15 @@ form.addEventListener('submit', async function (e) {
 
       response = await fetch(url, { method: 'POST', body: formData });
     } else {
-      // Kirim teks via JSON ke endpoint /generate-text.
-      response = await fetch('/generate-text', {
+      // Kirim pesan ke /chat — dengan sessionId (memory) dan gaya bahasa.
+      response = await fetch('/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: userMessage }),
+        body: JSON.stringify({
+          message: userMessage,
+          sessionId,
+          style: styleSelect.value,
+        }),
       });
     }
 

@@ -1,15 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gemini AI Chatbot</title>
+  <title>OctamaHoliday — Travel Assistant AI</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <div class="container">
-    <h1>Gemini AI Chatbot</h1>
+    <div class="header">
+      <h1>🌴 OctamaHoliday</h1>
+      <p class="subtitle">Asisten travel AI untuk Jogja, Bali & Bandung — lengkap dengan info cuaca terkini</p>
+    </div>
+    <div class="toolbar">
+      <label for="style-select">Gaya bahasa:</label>
+      <select id="style-select">
+        <option value="santai" selected>Santai 😎</option>
+        <option value="formal">Formal 🎩</option>
+      </select>
+      <button type="button" id="reset-btn" title="Hapus riwayat chat">Reset</button>
+    </div>
     <div id="chat-box" class="chat-box"></div>
+    <div class="chips">
+      <button type="button" class="chip">Itinerary 3 hari di Jogja</button>
+      <button type="button" class="chip">Rekomendasi kuliner Bandung</button>
+      <button type="button" class="chip">Cuaca di Bali hari ini</button>
+    </div>
     <div id="file-preview" class="file-preview hidden">
       <span id="file-name"></span>
       <button type="button" id="remove-file" title="Hapus file">&times;</button>

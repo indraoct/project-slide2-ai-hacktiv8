@@ -10,6 +10,9 @@ package-lock.json
 # File upload sementara (dikelola otomatis oleh multer)
 uploads/
 
+# Database SQLite memory percakapan chatbot (data lokal runtime)
+chat.db
+
 # macOS
 .DS_Store
 
