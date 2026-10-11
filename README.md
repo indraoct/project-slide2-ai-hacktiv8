@@ -1,5 +1,7 @@
 # project-slide2-ai-hacktiv8
 
+**Author:** Indra Octama
+
 RESTful API dengan ExpressJS yang terintegrasi dengan **Google Gemini API** (model default: `gemini-3.8-flash`) untuk menghasilkan respons dari berbagai tipe input: teks, gambar, dokumen, dan audio.
 
 Berdasarkan materi Sesi 2 — Eksplorasi Gemini AI API.
@@ -59,6 +61,13 @@ npm run dev
 ```
 
 Server berjalan di `http://localhost:3000`.
+
+## Web UI (Chatbot)
+
+Buka `http://localhost:3000` di browser untuk menggunakan antarmuka chatbot (folder `public/`). UI mendukung:
+
+- **Chat teks** — dikirim ke `/generate-text`
+- **Upload file** (tombol 📎) — gambar, dokumen, dan audio otomatis diarahkan ke endpoint masing-masing berdasarkan tipe file
 
 ## Endpoints
 

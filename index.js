@@ -13,7 +13,19 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 const PORT = process.env.PORT || 3000;
 
+// Konfigurasi generasi yang dipakai semua endpoint:
+// temperature 0.9 untuk respons lebih kreatif, dan systemInstruction
+// agar Gemini selalu menjawab dalam Bahasa Indonesia.
+const generationConfig = {
+  temperature: 0.9,
+  systemInstruction: "Jawab hanya menggunakan Bahasa Indonesia",
+};
+
 app.use(express.json());
+
+// Sajikan file statis (UI chatbot) dari folder public/,
+// sehingga frontend dan backend berjalan di satu server.
+app.use(express.static("public"));
 
 // Endpoint 1: /generate-text
 // Client mengirim prompt teks via body JSON, server meneruskan ke Gemini.
@@ -28,6 +40,7 @@ app.post("/generate-text", async (req, res) => {
     const response = await ai.models.generateContent({
       model: GEMINI_MODEL,
       contents: prompt,
+      config: generationConfig,
     });
 
     res.json({ result: response.text });
@@ -59,6 +72,7 @@ app.post("/generate-from-image", upload.single("image"), async (req, res) => {
         },
         { text: prompt },
       ],
+      config: generationConfig,
     });
 
     res.json({ result: response.text });
@@ -89,6 +103,7 @@ app.post("/generate-from-document", upload.single("document"), async (req, res) 
         },
         { text: prompt },
       ],
+      config: generationConfig,
     });
 
     res.json({ result: response.text });
@@ -120,6 +135,7 @@ app.post("/generate-from-audio", upload.single("audio"), async (req, res) => {
         },
         { text: prompt },
       ],
+      config: generationConfig,
     });
 
     res.json({ result: response.text });

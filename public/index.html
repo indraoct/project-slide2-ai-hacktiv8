@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gemini AI Chatbot</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Gemini AI Chatbot</h1>
+    <div id="chat-box" class="chat-box"></div>
+    <div id="file-preview" class="file-preview hidden">
+      <span id="file-name"></span>
+      <button type="button" id="remove-file" title="Hapus file">&times;</button>
+    </div>
+    <form id="chat-form">
+      <input type="file" id="file-input" accept="image/*,audio/*,.pdf,.txt,.doc,.docx,.csv,.md" hidden />
+      <button type="button" id="attach-btn" title="Lampirkan file (gambar/dokumen/audio)">&#128206;</button>
+      <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" />
+      <button type="submit" id="send-btn">Send</button>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
