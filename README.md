@@ -70,6 +70,28 @@ npm run dev
 
 Server berjalan di `http://localhost:3000`.
 
+## Menjalankan dengan Docker & Makefile
+
+Prasyarat: [Docker Desktop](https://www.docker.com/products/docker-desktop/) dan `make` (sudah bawaan macOS/Linux). Pastikan `.env` sudah berisi `GEMINI_API_KEY`.
+
+```bash
+make docker-up     # build image + jalankan container (background)
+make docker-logs   # lihat log secara live
+make docker-down   # stop & hapus container
+```
+
+Tanpa Docker, Makefile juga membungkus perintah lokal:
+
+```bash
+make install       # npm install
+make dev           # npm run dev (auto-reload)
+make start         # npm start
+make reset-db      # hapus memory chat (chat.db)
+make help          # daftar semua perintah
+```
+
+Memory percakapan (SQLite) di container disimpan di volume `chat-data` sehingga tetap ada setelah container restart — hapus permanen dengan `docker compose down -v`.
+
 ## Web UI (Chatbot)
 
 Buka `http://localhost:3000` di browser untuk menggunakan **NusaTrip** (folder `public/`). UI mendukung:

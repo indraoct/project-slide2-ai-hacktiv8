@@ -34,7 +34,9 @@ const STYLE_PROMPTS = {
 
 // === Memory percakapan dengan SQLite (fitur tambahan) ===
 // Menyimpan riwayat chat per sessionId agar konteks percakapan berlanjut.
-const db = new DatabaseSync("chat.db");
+// DB_PATH bisa di-override via env (dipakai Docker untuk volume /app/data);
+// default ./chat.db saat jalan lokal tanpa Docker.
+const db = new DatabaseSync(process.env.DB_PATH || "chat.db");
 db.exec(`
   CREATE TABLE IF NOT EXISTS messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

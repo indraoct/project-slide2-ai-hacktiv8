@@ -1,0 +1,18 @@
+services:
+  app:
+    build: .
+    container_name: nusatrip-app
+    ports:
+      - "3000:3000"
+    # GEMINI_API_KEY, GEMINI_MODEL, PORT dibaca dari .env di root project.
+    env_file:
+      - .env
+    environment:
+      # Lokasi SQLite di dalam container (di-persist via volume di bawah).
+      DB_PATH: /app/data/chat.db
+    volumes:
+      - chat-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  chat-data:

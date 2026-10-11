@@ -1,0 +1,20 @@
+# Secrets — jangan pernah masuk image (di-inject via env_file di compose)
+.env
+.env.local
+.env.*.local
+
+# Dependencies — di-install ulang di dalam image
+node_modules
+
+# Database runtime — dipersist lewat volume, bukan image
+chat.db
+data/
+
+# Git & OS artifacts
+.git
+.gitignore
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
