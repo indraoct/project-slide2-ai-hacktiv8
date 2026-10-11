@@ -1,8 +1,8 @@
-# project-slide2-ai-hacktiv8
+# OctamaHoliday
 
 **Author:** Indra Octama
 
-**NusaTrip** — chatbot travel assistant berbasis **Google Gemini API** (model: `gemini-3.8-flash`) dengan ExpressJS + web UI. Ahli pariwisata **Jogja, Bali, dan Bandung**: rekomendasi destinasi, itinerary, kuliner, transportasi, dan estimasi bujet.
+**OctamaHoliday** — (NusaTrip as inspiration) chatbot travel assistant berbasis **Google Gemini API** (model: `gemini-3.8-flash`) dengan ExpressJS + web UI. Ahli pariwisata **Jogja, Bali, dan Bandung**: rekomendasi destinasi, itinerary, kuliner, transportasi, dan estimasi bujet.
 
 Berdasarkan materi Sesi 2 & 3 — Eksplorasi Gemini AI API.
 
