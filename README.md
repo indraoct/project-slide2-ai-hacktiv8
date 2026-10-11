@@ -1,5 +1,7 @@
 # OctamaHoliday
 
+![Preview OctamaHoliday](header.png)
+
 **Author:** Indra Octama
 
 **OctamaHoliday** — (NusaTrip as inspiration) chatbot travel assistant berbasis **Google Gemini API** (model: `gemini-3.8-flash`) dengan ExpressJS + web UI. Ahli pariwisata **Jogja, Bali, dan Bandung**: rekomendasi destinasi, itinerary, kuliner, transportasi, dan estimasi bujet.
